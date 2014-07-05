@@ -27,9 +27,11 @@ let g:tex_flavor='latex'
 filetype plugin indent on " Enable filetype-specific plugins and indenting
 
 " Line numbering: absolute #'s in insert mode, relative #'s in normal mode
-autocmd VimEnter    * :set rnu
-autocmd InsertEnter * :set nornu nu
-autocmd InsertLeave * :set nonu rnu
+if version >= 703
+    autocmd VimEnter    * :set rnu
+    autocmd InsertEnter * :set nornu nu
+    autocmd InsertLeave * :set nonu rnu
+endif
 
 " Indentation
 set smartindent
