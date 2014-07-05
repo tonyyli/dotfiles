@@ -1,0 +1,131 @@
+" vim:foldmethod=marker
+
+" Pathogen {{{------------------------------------------------------------------
+"
+" Useful Vim plugin manager.  More info and instructions at:
+"   https://github.com/tpope/vim-pathogen
+execute pathogen#infect()
+" }}}---------------------------------------------------------------------------
+
+" Functionality {{{-------------------------------------------------------------
+set nocompatible " Turn off Vi compatibility
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a single file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+" }}}---------------------------------------------------------------------------
+
+" Appearance {{{----------------------------------------------------------------
+
+" Filetype detection
+filetype plugin indent on " Enable filetype-specific plugins and indenting
+
+" Line numbering: absolute #'s in insert mode, relative #'s in normal mode
+autocmd VimEnter    * :set rnu
+autocmd InsertEnter * :set nornu nu
+autocmd InsertLeave * :set nonu rnu
+
+" Indentation
+set smartindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" Character limit per line, for certain filetypes
+autocmd bufreadpre *.md setlocal textwidth=80
+
+set hlsearch " Highlight last-searched term
+
+" Status line
+set laststatus=2 " always show the status line
+set noshowmode
+
+" Colors
+syntax enable " Use 'enable' vs 'on' so that vim doesn't overrule my settings
+set background=dark
+" }}}---------------------------------------------------------------------------
+
+" GUI (gVim or MacVim) {{{------------------------------------------------------
+if has("gui_running")
+    " Color scheme
+    colorscheme jellybeans
+
+    " Set font name and size, based on OS
+    if has("gui_gtk2")
+        set guifont=Inconsolata\ 12
+    elseif has("gui_macvim")
+        set guifont=Menlo\ Regular:h12
+    elseif has("gui_win32")
+        set guifont=Consolas:h11:cANSI
+    endif
+
+    " Window appearance
+    set go-=T       " Disable GUI toolbar
+    set go-=r       " Disable right scrollbar
+    set lines=999   " Maximize window height
+    set columns=999 " Maximize window width
+endif
+" }}}---------------------------------------------------------------------------
+
+" Window splitting {{{----------------------------------------------------------
+set splitright
+set splitbelow
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" }}}---------------------------------------------------------------------------
+
+" Goyo {{{----------------------------------------------------------------------
+"
+" Distraction-free editing plugin.  More info and instructions at:
+"   https://github.com/junegunn/goyo.vim
+
+" Toggle Goyo with '\' + <Space>
+nnoremap <Leader><Space> :Goyo<CR>
+
+function! Goyo_before()
+  " Ensure :q quits even when Goyo is active
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+
+  " If using a GUI or tmux
+  if has('gui_running')
+    set fullscreen
+    set linespace=7
+  elseif exists('$TMUX')
+    silent !tmux set status off
+  endif
+endfunction
+
+function! Goyo_after()
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+
+  " If using a GUI or tmux
+  if has('gui_running')
+    set nofullscreen
+    set linespace=0
+  elseif exists('$TMUX')
+    silent !tmux set status on
+  endif
+endfunction
+
+let g:goyo_callbacks = [function('Goyo_before'), function('Goyo_after')]
+" }}}---------------------------------------------------------------------------
+
