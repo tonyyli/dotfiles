@@ -31,6 +31,8 @@ if version >= 703
     autocmd VimEnter    * :set rnu
     autocmd InsertEnter * :set nornu nu
     autocmd InsertLeave * :set nonu rnu
+else " use absolute line numbering at the very least
+    set nu
 endif
 
 " Indentation
