@@ -38,6 +38,10 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
+" Indent folding (for Python)
+autocmd FileType python set foldmethod=indent foldnestmax=2 foldignore= 
+
+
 " Character limit per line, for certain filetypes
 autocmd bufreadpre *.md setlocal textwidth=80
 
