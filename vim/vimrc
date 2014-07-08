@@ -45,7 +45,7 @@ set shiftwidth=4
 set expandtab
 
 " Indent folding (for Python)
-"autocmd FileType python set foldmethod=indent foldnestmax=2 foldignore= 
+autocmd FileType python set foldmethod=indent foldnestmax=1 foldignore= 
 
 
 " Character limit per line, for certain filetypes
