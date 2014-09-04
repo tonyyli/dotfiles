@@ -3,8 +3,6 @@ let g:Tex_ViewRule_pdf = 'Preview'
 
 let g:Tex_MultipleCompileFormats = 'dvi,pdf'
 
-let g:Tex_FoldedEnvironments = ',appendix'
-
 " Ignored warnings
 let g:Tex_IgnoredWarnings =
 	\'Underfull'."\n".
