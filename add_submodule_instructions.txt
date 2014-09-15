@@ -1,0 +1,4 @@
+git submodule init
+git submodule add git://github.com/USER/PLUGIN-NAME.git vim/bundle/PLUGIN-NAME
+git commit -m 'Added PLUGIN-NAME'
+git push
