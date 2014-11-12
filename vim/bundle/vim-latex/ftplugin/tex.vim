@@ -12,6 +12,7 @@ let g:Tex_IgnoredWarnings =
 	\'Missing number, treated as zero.'."\n".
 	\'There were undefined references'."\n".
 	\'Citation %.%# undefined'."\n".
-	\'A float is stuck'
-let g:Tex_IgnoreLevel = 8
+	\'A float is stuck'."\n".
+	\'Text page %n contains only floats'
+let g:Tex_IgnoreLevel = 9
 
