@@ -133,7 +133,7 @@ font.weight         : normal
 # small, medium, large, x-large, xx-large, larger, or smaller
 font.size           : 12.0
 #font.serif          : Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
-font.sans-serif     : Helvetica, Lucida Grande, Verdana, Geneva, Lucid, Arial, Avant Garde, sans-serif, Bitstream Vera Sans
+font.sans-serif     : Helvetica #, Lucida Grande, Verdana, Geneva, Lucid, Arial, Avant Garde, sans-serif, Bitstream Vera Sans
 #font.cursive        : Apple Chancery, Textile, Zapf Chancery, Sand, cursive
 #font.fantasy        : Comic Sans MS, Chicago, Charcoal, Impact, Western, fantasy
 #font.monospace      : Bitstream Vera Sans Mono, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
@@ -146,7 +146,7 @@ font.sans-serif     : Helvetica, Lucida Grande, Verdana, Geneva, Lucid, Arial, A
 #text.color          : black
 
 ### LaTeX customizations. See http://www.scipy.org/Wiki/Cookbook/Matplotlib/UsingTex
-text.usetex         : True    # use latex for all text handling. The following fonts
+#text.usetex         : True    # use latex for all text handling. The following fonts
                               # are supported through the usual rc parameter settings:
                               # new century schoolbook, bookman, times, palatino,
                               # zapf chancery, charter, serif, sans-serif, helvetica,
@@ -157,7 +157,7 @@ text.usetex         : True    # use latex for all text handling. The following f
                               # matplotlib mailing list
 #text.latex.unicode : False # use "ucs" and "inputenc" LaTeX packages for handling
                             # unicode strings.
-text.latex.preamble :   \usepackage{siunitx}, \sisetup{detect-all}, \usepackage{helvet}, \usepackage{sansmath}, \sansmath
+#text.latex.preamble :   \usepackage{siunitx}, \sisetup{detect-all}, \usepackage{helvet}, \usepackage{sansmath}, \sansmath
                         # (^ stolen from: http://stackoverflow.com/questions/2537868/sans-serif-math-with-latex-in-matplotlib/20709149#20709149)
                             # IMPROPER USE OF THIS FEATURE WILL LEAD TO LATEX FAILURES
                             # AND IS THEREFORE UNSUPPORTED. PLEASE DO NOT ASK FOR HELP
@@ -222,14 +222,14 @@ mathtext.default : regular # The default font to use for math.
 # default fontsizes for ticklabels, and so on.  See
 # http://matplotlib.org/api/axes_api.html#module-matplotlib.axes
 #axes.hold           : True    # whether to clear the axes by default on
-axes.facecolor      : f8f8f8   # axes background color
-axes.edgecolor      : 191919   # axes edge color
-axes.linewidth      : 0.5     # edge linewidth
+axes.facecolor      : ffffff   # axes background color
+axes.edgecolor      : 000000   # axes edge color
+axes.linewidth      : 0.8     # edge linewidth
 axes.grid           : True   # display grid or not
-axes.titlesize      : large   # fontsize of the axes title
-axes.labelsize      : medium  # fontsize of the x any y labels
+axes.titlesize      : medium   # fontsize of the axes title
+axes.labelsize      : small  # fontsize of the x any y labels
 #axes.labelweight    : normal  # weight of the x and y labels
-axes.labelcolor     : 191919
+axes.labelcolor     : 000000
 axes.axisbelow      : True   # whether axis gridlines and ticks are below
                               # the axes elements (lines, text, etc)
 #axes.formatter.limits : -7, 7 # use scientific notation if log10
@@ -266,8 +266,8 @@ axes.color_cycle    : 348ABD, 7A68A6, A60628, 467821, CF4457, 188487, E24A33
 #xtick.minor.width    : 0.5    # minor tick width in points
 #xtick.major.pad      : 4      # distance to major tick label in points
 #xtick.minor.pad      : 4      # distance to the minor tick label in points
-xtick.color          : 191919 # color of the tick labels
-xtick.labelsize      : medium # fontsize of the tick labels
+xtick.color          : 000000 # color of the tick labels
+xtick.labelsize      : small # fontsize of the tick labels
 #xtick.direction      : in     # direction: in, out, or inout
 
 #ytick.major.size     : 4      # major tick size in points
@@ -276,15 +276,15 @@ xtick.labelsize      : medium # fontsize of the tick labels
 #ytick.minor.width    : 0.5    # minor tick width in points
 #ytick.major.pad      : 4      # distance to major tick label in points
 #ytick.minor.pad      : 4      # distance to the minor tick label in points
-ytick.color          : 191919  # color of the tick labels
-ytick.labelsize      : medium  # fontsize of the tick labels
+ytick.color          : 000000  # color of the tick labels
+ytick.labelsize      : small  # fontsize of the tick labels
 #ytick.direction      : in     # direction: in, out, or inout
 
 
 ### GRIDS
-grid.color       :   191919   # grid color
-#grid.linestyle   :   :       # dotted
-#grid.linewidth   :   0.5     # in points
+grid.color       :   eeeeee   # grid color
+grid.linestyle   :   -       # linestyle
+grid.linewidth   :   0.5     # in points
 #grid.alpha       :   1.0     # transparency, between 0.0 and 1.0
 
 ### Legend
@@ -303,12 +303,12 @@ legend.fontsize      : medium
 #legend.borderaxespad : 0.5   # the border between the axes and legend edge in fraction of fontsize
 #legend.columnspacing : 2.    # the border between the axes and legend edge in fraction of fontsize
 #legend.shadow        : False
-#legend.frameon       : True   # whether or not to draw a frame around legend
-#legend.scatterpoints : 3 # number of scatter points
+legend.frameon       : True   # whether or not to draw a frame around legend
+legend.scatterpoints : 1 # number of scatter points
 
 ### FIGURE
 # See http://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure
-figure.figsize   : 6.0, 4.5    # figure size in inches
+figure.figsize   : 6.0, 4.5    # figure size in inches (width, height)
 figure.dpi       : 150      # figure dots per inch
 figure.facecolor : 1.0    # figure facecolor; 0.75 is scalar gray
 #figure.edgecolor : white   # figure edgecolor
