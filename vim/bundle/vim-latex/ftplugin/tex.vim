@@ -15,4 +15,3 @@ let g:Tex_IgnoredWarnings =
 	\'A float is stuck'."\n".
 	\'Text page %n contains only floats'
 let g:Tex_IgnoreLevel = 9
-

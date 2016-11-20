@@ -1,0 +1,50 @@
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ls='ls -G' # color support of ls, added for Mac OS
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Allow color highlighting in less
+export LESS='-R'
+export LESSOPEN='|~/.lessfilter %s'
+
+###
+### Other useful aliases
+###
+alias c='cd'
+alias rm='rm -i'   # Avoid accidentally removing items
+
+# MacVim aliases: comment out if not on a mac!
+alias gvim='mvim'
+alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+
+# Python aliases
+alias python='ipython'
+alias jn='jupyter notebook'
+
+# Get-to-work-faster aliases
+alias kinit='kinit tonyyli@SLAC.STANFORD.EDU' # Requires kinit
+alias nt='nametab' # short script to name current iTerm tab
+
+# Git aliases
+alias gp='git push '
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'

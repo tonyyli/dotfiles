@@ -7,7 +7,7 @@
 filetype off
 
 " Disabled plugins
-let g:pathogen_disabled = ["python-mode"]
+let g:pathogen_disabled = ["python-mode", "jedi-vim"]
 
 call pathogen#infect()
 call pathogen#helptags()
@@ -76,7 +76,7 @@ autocmd FileType python set foldmethod=indent foldnestmax=1 foldignore=
 au! FileType python setl nosmartindent " unset smartindent for python
 
 " Character limit per line, for certain filetypes
-autocmd bufreadpre *.md, *.tex setlocal textwidth=80
+autocmd bufreadpre *.md,*.tex setlocal textwidth=80
 
 set linebreak   " Avoid breaking lines mid-word
 set hlsearch    " Highlight last-searched term
