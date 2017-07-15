@@ -39,6 +39,7 @@ alias kinit='kinit tonyyli@SLAC.STANFORD.EDU' # Requires kinit
 alias nt='nametab' # short script to name current iTerm tab
 
 # Git aliases
+alias gg='git clone '
 alias gp='git push '
 alias gs='git status '
 alias ga='git add '
