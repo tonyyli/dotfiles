@@ -1,0 +1,185 @@
+" vim:foldmethod=marker
+
+set nocompatible " Turn off Vi compatibility
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'davidhalter/jedi-vim'   " Python autocompletion
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+" Functionality {{{-------------------------------------------------------------
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a single file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+" }}}---------------------------------------------------------------------------
+
+" Appearance {{{----------------------------------------------------------------
+
+" Filetype detection
+filetype plugin indent on " Enable filetype-specific plugins and indenting
+
+"" Cursor appearance in the terminal (not GUI)
+"if &term =~ "xterm\\|rxvt"
+"  " use an orange cursor in insert mode
+"  let &t_SI = "\<Esc>]12;orange\x7"
+"  " use a red cursor otherwise
+"  let &t_EI = "\<Esc>]12;red\x7"
+"  silent !echo -ne "\033]12;red\007"
+"  " reset cursor when vim exits
+"  autocmd VimLeave * silent !echo -ne "\033]112\007"
+"  " use \003]12;gray\007 for gnome-terminal
+"endif
+"if &term =~ '^xterm'
+"  " solid underscore
+"  let &t_SI .= "\<Esc>[4 q"
+"  " solid block
+"  let &t_EI .= "\<Esc>[2 q"
+"  " 1 or 0 -> blinking block
+"  " 3 -> blinking underscore
+"  " Recent versions of xterm (282 or above) also support
+"  " 5 -> blinking vertical bar
+"  " 6 -> solid vertical bar
+"endif
+
+" Line numbering: absolute #'s in insert mode, relative #'s in normal mode
+if version >= 703
+    autocmd VimEnter    * :set rnu
+    autocmd InsertEnter * :set nornu nu
+    autocmd InsertLeave * :set nonu rnu
+else " use absolute line numbering at the very least
+    set nu
+endif
+
+" Indentation
+set smartindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" Indent folding (for Python)
+autocmd FileType python set foldmethod=indent foldnestmax=1 foldignore= 
+au! FileType python setl nosmartindent " unset smartindent for python
+
+" Character limit per line, for certain filetypes
+autocmd bufreadpre *.md, *.tex setlocal textwidth=80
+
+set linebreak   " Avoid breaking lines mid-word
+set hlsearch    " Highlight last-searched term
+
+" Status line
+set laststatus=2 " always show the status line
+set noshowmode
+
+" Colors
+syntax enable " Use 'enable' vs 'on' so that vim doesn't overrule my settings
+set background=dark
+" }}}---------------------------------------------------------------------------
+
+" GUI (gVim or MacVim) {{{------------------------------------------------------
+if has("gui_running")
+    " Color scheme
+    colorscheme jellybeans
+
+    " Set font name and size, based on OS
+    if has("gui_gtk2")
+        set guifont=Inconsolata\ 10
+    elseif has("gui_macvim")
+        set guifont=Menlo\ Regular:h12
+    elseif has("gui_win32")
+        set guifont=Consolas:h11:cANSI
+    endif
+
+    " Window appearance
+    set go-=T       " Disable GUI toolbar
+    set go-=r       " Disable right scrollbar
+    set lines=999   " Maximize window height
+    set columns=999 " Maximize window width
+endif
+" }}}---------------------------------------------------------------------------
+
+" Window splitting {{{----------------------------------------------------------
+set splitright
+set splitbelow
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" }}}---------------------------------------------------------------------------
+
+" Goyo {{{----------------------------------------------------------------------
+"
+" Distraction-free editing plugin.  More info and instructions at:
+"   https://github.com/junegunn/goyo.vim
+
+" Toggle Goyo with '\' + <Space>
+nnoremap <Leader><Space> :Goyo<CR>
+
+function! Goyo_before()
+  " Ensure :q quits even when Goyo is active
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+
+  " If using a GUI or tmux
+  if has('gui_running')
+    set fullscreen
+    set linespace=7
+  elseif exists('$TMUX')
+    silent !tmux set status off
+  endif
+endfunction
+
+function! Goyo_after()
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+
+  " If using a GUI or tmux
+  if has('gui_running')
+    set nofullscreen
+    set linespace=0
+  elseif exists('$TMUX')
+    silent !tmux set status on
+  endif
+endfunction
+
+let g:goyo_callbacks = [function('Goyo_before'), function('Goyo_after')]
+" }}}---------------------------------------------------------------------------
+
