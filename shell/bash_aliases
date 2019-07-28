@@ -14,7 +14,7 @@ fi
 alias ls='ls -G' # color support of ls, added for Mac OS
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -G'
 
 # Allow color highlighting in less
 export LESS='-R'
@@ -28,7 +28,7 @@ alias rm='rm -i'   # Avoid accidentally removing items
 
 # MacVim aliases: comment out if not on a mac!
 alias gvim='mvim'
-alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+#alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 
 # Python aliases
 alias python='ipython'
