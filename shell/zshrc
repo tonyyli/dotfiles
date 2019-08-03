@@ -1,6 +1,15 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# From `brew install coreutils`:
+#   Commands also provided by macOS have been installed with the prefix "g".
+#   If you need to use these commands with their normal names, you
+#   can add a "gnubin" directory to your PATH from your bashrc like:
+#   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+################################################################################
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/tonyyli/.dotfiles/oh-my-zsh
 
@@ -21,7 +30,7 @@ ZSH_THEME="agnoster"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -161,7 +170,7 @@ export PATH=$PATH:$SCALA_HOME/bin
 ## uncomment for a colored prompt, if the terminal has the capability; turned
 ## off by default to not distract the user: the focus in a terminal window
 ## should be on the output of commands, not on the prompt
-##force_color_prompt=yes
+#force_color_prompt=yes
 #
 #if [ -n "$force_color_prompt" ]; then
 #    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -214,20 +223,20 @@ export PATH=$PATH:$SCALA_HOME/bin
 
 # BEGIN COPIED bash_aliases 2018-05-06
 
-## enable color support of ls and also add handy aliases
-#if [ -x /usr/bin/dircolors ]; then
-#    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-#    alias ls='ls --color=auto'
-#    #alias dir='dir --color=auto'
-#    #alias vdir='vdir --color=auto'
-#
-#    alias grep='grep --color=auto'
-#    alias fgrep='fgrep --color=auto'
-#    alias egrep='egrep --color=auto'
-#fi
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ] || [ -x "/usr/local/opt/coreutils/libexec/gnubin/dircolors" ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
 # some more ls aliases
-alias ls='ls -G' # color support of ls, added for Mac OS
+#alias ls='ls -G' # color support of ls, added for Mac OS
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -G'
@@ -241,12 +250,14 @@ export LESSOPEN='|~/.lessfilter %s'
 ####
 #alias c='cd'
 #alias rm='rm -i'   # Avoid accidentally removing items
-#
-## MacVim aliases: comment out if not on a mac!
-#alias gvim='mvim'
-##alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-#
-## Python aliases
+
+# MacVim aliases
+if [[ "$OSTYPE" == "darwin"* ]]; then # Mac OSX
+    alias gvim='mvim'
+    alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+fi
+
+# Python aliases
 alias ipy='ipython'
 alias jn='jupyter notebook &'
 #
