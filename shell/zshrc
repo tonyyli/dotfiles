@@ -11,7 +11,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 ################################################################################
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/tonyyli/.dotfiles/oh-my-zsh
+export ZSH=$HOME/.dotfiles/oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -122,7 +122,9 @@ eval "$(fasd --init auto)"
 # Python scripts and functions
 export PATH=$PATH:$HOME/Dropbox/Code/python/scripts:$HOME/Dropbox/Code/python
 export PYTHONPATH=$PYTHONPATH:$HOME/Dropbox/Code/python/scripts:$HOME/Dropbox/Code/python
-export PATH="/Users/tonyyli/anaconda/bin:$PATH"
+case "$SHORT_HOST" in
+    macbooktwo) export PATH="/Users/tonyyli/anaconda/bin:$PATH";;
+esac
 
 export WORKON_HOME=$HOME/.virtualenvs
 source /Users/tonyyli/anaconda/bin/virtualenvwrapper.sh
