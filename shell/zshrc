@@ -53,7 +53,7 @@ HYPHEN_INSENSITIVE="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -123,11 +123,17 @@ eval "$(fasd --init auto)"
 export PATH=$PATH:$HOME/Dropbox/Code/python/scripts:$HOME/Dropbox/Code/python
 export PYTHONPATH=$PYTHONPATH:$HOME/Dropbox/Code/python/scripts:$HOME/Dropbox/Code/python
 case "$SHORT_HOST" in
-    macbooktwo) export PATH="/Users/tonyyli/anaconda/bin:$PATH";;
+    macbooktwo) 
+        export PATH="/Users/tonyyli/anaconda/bin:$PATH"
+        VIRTUALENVWRAPPER_SCRIPT=/Users/tonyyli/anaconda/bin/virtualenvwrapper.sh
+        ;;
+    raspberrypi)
+        VIRTUALENVWRAPPER_SCRIPT=/home/pi/.local/bin/virtualenvwrapper.sh
+        ;;
 esac
 
 export WORKON_HOME=$HOME/.virtualenvs
-source /Users/tonyyli/anaconda/bin/virtualenvwrapper.sh
+source $VIRTUALENVWRAPPER_SCRIPT
 alias mkve="mkvirtualenv"
 
 # Bash scripts
